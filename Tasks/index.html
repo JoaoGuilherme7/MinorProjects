@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
     <link rel="stylesheet" href="style.css">
-    <script src="tasks.js"></script>
+    <script src="tasks.js" defer></script>
 </head>
 <body>
     <section>
@@ -21,7 +21,7 @@
         
         <!-- --------------- -->
         <div class="lists">
-            <div class="border">
+            <span class="border">
                 <div class="List" id="ToDo">
                     <h2>To Do:</h2>
                     <ul id="tasksList">
@@ -29,7 +29,7 @@
                         <!-- <li><input  type="radio" name="task" onchange="ManipulateRadioBtns()" value="lavar louça">lavar louça</li>  -->
                     </ul>
                 </div>
-            </div>
+            </span>
 
             <span class="border">
                 <div class="List" id="Done">
@@ -39,6 +39,7 @@
                     </ul>
                 </div>
             </span>
+
         </div>
     </section>
     

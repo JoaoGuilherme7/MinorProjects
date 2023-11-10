@@ -158,5 +158,26 @@ li:nth-child(even){
 }
 li:nth-child(odd){
     background-color: #0000006c;
+}
 
+
+input[type="checkbox"] {
+    /* appearance: none; */
+    margin-right: .3rem;
+    border-radius: 50%;
+
+    background-color: red;
+}
+
+.biri{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    width: 20px;
+    background-color: #37ce37;
+}
+
+.biri input:checked{
+    background-color: blue;
 }

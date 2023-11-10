@@ -8,6 +8,7 @@
 }
 
 body{
+    min-width: 270px;
     min-height: 100vh;
     background-color: #161616;
 }
@@ -15,7 +16,6 @@ body{
 section{
     margin: 0 auto;
     width: 80%;
-    /* min-height: 100vh; */
     height: fit-content;
     background-color: #161616;
     padding: 1rem 2rem;
@@ -32,97 +32,28 @@ section{
     }
 }
 
-.formDiv{
+.navBar{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    position: relative;
-    padding-bottom: .6rem;
+    padding: 1rem ;
+    padding-bottom: 5px;
+    width: 100%;
+
+
     border-bottom: 1px solid transparent;
     border-image: linear-gradient(.25turn,rgba(56,2,155,0), rgba(255,249,34), rgba(255,0,128), rgba(255,249,34), rgba(255,0,128), rgba(56,2,155,0)) 1;
 
-    margin-bottom: 1rem;
     /* border: 2px solid red; */
 
 }
 
-@media screen and (max-width: 600px) {
-    .formDiv{
-        justify-content: flex-end;
-    }
-}
-
-.formDiv h1{
-    position: absolute;
-    left: 0;
+.navBar h1{
     font-size: 2em;
     color: #fff;
     /* border: 2px solid red; */
 }
 
-form{
-    /* border: 2px solid red; */
-    display: flex;
-    justify-self: center;
-    width: 50%;
-    flex-wrap: nowrap;
-    /* overflow: hidden; */
-    position: relative;
-
-}
-
-@media screen and (max-width: 600px) {
-
-    form{
-        width: 70%;
-    }
-}
-
-@media screen and (max-width: 420px) {
-
-    .formDiv{
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .formDiv h1{
-        position: relative;
-    }
-
-    form{
-        width: 100%;
-    }
-}
-
-#task{
-    height: 1.9rem;
-    padding: 0 .4rem;
-    width: 100%;
-    margin-right: .2rem;
-    border-radius: 25px;
-    border: 1px solid grey;
-    outline: none;
-    color: #666;
-}
-
-#submit{
-    width: 1.5rem;
-    height: 1.5rem;
-    background-color: #eee;
-    border: 1px solid #aaa;
-    border-radius: 50%;
-    outline: none;
-    position: absolute;
-    right:5px;
-    align-self: center;
-    font-size: .95rem;
-    color: #666;
-
-}
-
-#submit:disabled{
-    color: #888
-}
 
 .lists{
     /* border: 2px solid red; */
@@ -146,6 +77,50 @@ form{
     background-image: linear-gradient(0.44turn, rgba(255,249,34), rgba(255,0,128), rgba(255,249,34), rgba(255,0,128));
 }
 
+form{
+    display: flex;
+    width: 100%;
+    position: relative;
+    margin-bottom: 5px;
+    height: 1.9rem;
+    padding: 0 .15rem;
+    border-radius: 25px;
+    border: 1px solid grey;
+    background-color: #fff;
+    overflow: hidden;
+
+}
+
+#task{
+    background-color: #fff;
+    width: 100%;
+    outline: none;
+    color: #666;
+    border:none;
+    padding:0 5px ;
+    /* border: 2px solid red; */
+}
+
+
+#submit{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: #eee;
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    outline: none;
+
+    align-self: center;
+    font-size: .95rem;
+    color: #666;
+
+}
+
+#submit:disabled{
+    color: #888
+}
+
+
 .List{
     padding: .6rem .8rem;
     color: #fff;
@@ -165,6 +140,7 @@ ul{
     list-style: none;
 }
 
+
 li{
     display: flex;
     align-items: center;
@@ -173,6 +149,7 @@ li{
     margin-bottom: 5px;
     font-weight: 300;
     word-break: break-all;
+    position: relative;
 }
 
 li:nth-child(even){
@@ -200,6 +177,7 @@ label{
 }
 
 .checkSpan::before{
+    transition: all 1s;
     content: '';
     display: block;
     background-image: linear-gradient(0.44turn, rgba(255,249,34), rgba(255,0,128)); ;
@@ -208,7 +186,7 @@ label{
     border-radius: 50%;
     transition: 1s;
     visibility: hidden;
-    transition: 1s;
+    
     
 }
 
@@ -218,4 +196,27 @@ label input[type="checkbox"]{
 
 label input[type="checkbox"]:checked + .checkSpan::before{
     visibility: visible;
+}
+
+.deleteButton{
+
+    border:none;
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.479);
+    border-radius: 50%;
+    color: #393939;
+    margin-left: 5px;
+
+    position: absolute;
+    right: .4rem;
+    top:.4rem;
+
+}
+
+.deleteButton:hover{
+    transition: .3s;
+
+    color: white;
+
 }

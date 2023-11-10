@@ -1,26 +1,22 @@
+let toDo = [];
+let done = [];
+const field = (seletor) => document.querySelector(seletor);
 
-document.addEventListener('DOMContentLoaded', () => {
+formatForm();
+veryfyInputContent();
 
-    formatForm();
-    veryfyInputContent();
 
-    const form = document.querySelector('form');
-    form.onsubmit = () => {
-        createToDoList();
-        // Stop form submiting
-        return false;
-    }
+const form = field('form');
+form.onsubmit = () => {
+    createToDoList();
+    // Stop form submiting
+    return false;
+}
 
-    // when input[name="toDoTask"]:checked
-    // manipulateCheckedBox();
-
-    // when input[name="doneTask"]:not(:checked)
-    // manipulateUncheckedBox();
-})
 
 function veryfyInputContent() {
-    const submitButton = document.querySelector('#submit');
-    const inputField = document.querySelector('#task');
+    const submitButton = field('#submit');
+    const inputField = field('#task');
 
     inputField.onkeyup = () => {
         if (inputField.value.length > 0) {
@@ -32,10 +28,10 @@ function veryfyInputContent() {
 }
 
 function formatForm() {
-    const inputField = document.querySelector('#task');
+    const inputField = field('#task');
     //CLEAR INPUT FIELD & SET SUBMIT BUTTON DISABLED
-    document.querySelector('#task').value = '';
-    document.querySelector('#submit').disabled = true;
+    field('#task').value = '';
+    field('#submit').disabled = true;
     inputField.focus();
 }
 
@@ -50,62 +46,74 @@ function transformToLi(value) {
                     </label>
                     <p>${value}</p>               
                 </li>`;
+    //<li></li>     
     return li;
 }
 
 function pasteToDoTask(array) {
-    document.querySelector('#tasksList').innerHTML = array;
+    field('#tasksList').innerHTML = array;
+}
+
+function encode(userInput) {
+    const specialChars = '<>';
+    const encoder = new TextEncoder();
+
+    let letters = userInput.split('');
+    for (i = 0; i < letters.length; i++) {
+
+        if (specialChars.includes(letters[i])) {
+            letters[i] = '&#' + encoder.encode(letters[i]) + ';';
+        }
+    }
+
+    return letters.join('');
 }
 
 function getTask() {
-    const task = document.querySelector('#task').value;
+    const task = encode(field('#task').value);
     return task;
 }
 
 function add_ToArray_(iten, array) {
-
     array.push(iten);
     return array;
 }
-
-var toDo = [];
 
 // pega a tarefa digitada(getTask), adiciona ao array de tarefas(add_ToArray_), transforma em uma lista de li's(transformToLi),concatena as li's e cola na ul ToDo(pasteToDoTask) e limpa o input.
 function createToDoList() {
     const task = getTask()
     add_ToArray_(task, toDo);
-    let liToDoArray = toDo.map(transformToLi).join('');
+    let liToDoArray = toDo.map(transformToLi).reverse().join('');
     pasteToDoTask(liToDoArray)
     formatForm();
 }
 
 // ::::::::::::::::::::::::::::::::::::::::::
 // -----------TODO TO DONE-----------
-
-var done = [];
-
 // retorna apenas a string da task
 function findSelected() {
-    let selected = document.querySelector('input[name="toDoTask"]:checked').value;
+    let selected = field('input[name="toDoTask"]:checked').value;
     return selected;
 }
 // transforma cada item em uma li com os atributos necessarios 
 // Ajeitar o delete
 function transformToDoneLi(value) {
 
-    const li = ` <li data-index = ${done.indexOf(value)}>
+    value = encode(value);
+
+    const li = `<li data-index = ${done.indexOf(value)}>
                     <label>
                         <input type="checkbox" name="doneTask" value="${value}" onchange="manipulateUncheckedBox()" checked>
                         <span class="checkSpan"></i></span>
                     </label>
                     <p>${value}</p>
-                    <button onclick="deleteFromArray(this)"} class="deleteButton">X</button>
+                    <button onclick="deleteFromArray(this)" class="deleteButton">X</button>
                 </li>`;
     return li;
 }
 // "pega o array de li concatenado e publica na ul "Done"
 function pasteDoneTask(array) {
-    document.querySelector('#doneTasksList').innerHTML = array;
+    field('#doneTasksList').innerHTML = array;
 }
 // tendo o conteúdo, retorna o indice dele no array passado.
 function takeIndex(array, value) {
@@ -136,9 +144,10 @@ function manipulateCheckedBox() {
 // -----------DONE TO TODO-----------
 
 function findUnselected() {
-    let unselected = document.querySelector('input[name="doneTask"]:not(:checked)').value;
+    let unselected = encode(field('input[name="doneTask"]:not(:checked)').value);
     return unselected;
 }
+
 //pega a atividade que foi removido o check, pega o indice dessa atividade no array "done[]" para então deletar essa posição do array. Com o array Done atualizado ele passa pelo processo de criação das Li's, concatenação e publicação no "Done". A atividade que foi removido o check então é agregada ao array de ToDo que passa pelo processo de  criação de li's concatenação e publicação no "To Do".
 function manipulateUncheckedBox() {
 
@@ -157,7 +166,7 @@ function manipulateUncheckedBox() {
 }
 
 // :::::::::::::::::::::::::::::::::::::::::
-// -----------DELETAR DONE ITEM-----------
+// -----------DELET DONE ITEM-----------
 
 function getDataIndexDaLiDo(botao) {
     var elementoPai = botao.parentNode;
@@ -172,4 +181,12 @@ function deleteFromArray(botao) {
     // publicar ToDoList atualizada
     let liDoneArray = done.map(transformToDoneLi).join('');
     pasteDoneTask(liDoneArray);
+}
+
+// :::::::::::::::::::::::::::::::::::::::::
+// -----------DELET ALL DONE ITEMS-----------
+
+function deleteAllDoneItems() {
+    done.length = 0;
+    pasteDoneTask(done);
 }

@@ -7,33 +7,35 @@
     <title>Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
-    <script src="tasks.js"></script>
+    <script src="tasks.js" defer></script>
+
 </head>
 <body>
     <nav class="navBar">
         <h1>Tasks.</h1>
     </nav>
-
     <section>
         <div class="lists">
             <span class="border">
                 <div class="List" id="ToDo">
-                    <h2>To Do:</h2>
+                    <span class="listHeading">
+                        <h2>To Do:</h2>
+                    </span>
                     <form action="">
                         <input type="text" placeholder="New Task" id="task">
                         <button type="submit" id="submit">+</button>
-                        
                     </form>
-
-                    <ul id="tasksList">
-                        
+                    <ul id="tasksList">     
                     </ul>
                 </div>
             </span>
 
             <span class="border">
                 <div class="List" id="Done">
-                    <h2>Done:</h2>
+                    <span class="listHeading">
+                        <h2>Done:</h2>
+                        <button id="clearButton" onclick="deleteAllDoneItems()">Clear</button>
+                    </span>
                     <ul id="doneTasksList">
                     </ul>
                 </div>

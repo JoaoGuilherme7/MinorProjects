@@ -1,22 +1,28 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-
     formatForm();
     veryfyInputContent();
 
     const form = document.querySelector('form');
     form.onsubmit = () => {
-        main();
+        createToDoList();
         // Stop form submiting
         return false;
     }
 
-    manipulateCheckedBox();
-    manipulateUncheckedBox();
 
 
+    // when input[name="toDoTask"]:checked
+    // manipulateCheckedBox();
+
+    // when input[name="doneTask"]:not(:checked)
+    // manipulateUncheckedBox();
 })
+
+
+
+// :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 function veryfyInputContent() {
     const submitButton = document.querySelector('#submit');
     const inputField = document.querySelector('#task');
@@ -38,8 +44,11 @@ function formatForm() {
 }
 function transformToLi(value) {
     const li = ` <li data-index = ${toDo.indexOf(value)}>
-                    <input type="checkbox" name="toDoTask" value="${value}" onchange="manipulateCheckedBox()">
-                    <label for="doneTask">${value}</label>
+                    <label >
+                        <input type="checkbox" name="toDoTask" value="${value}" onchange="manipulateCheckedBox()">
+                        <span class="checkSpan"></span>
+                    </label>
+                    ${value}
                 </li>`;
     return li;
 }
@@ -60,7 +69,7 @@ function add_ToArray_(iten, array) {
 var toDo = [];
 
 // pega a tarefa digitada(getTask), adiciona ao array de tarefas(ddToArray), transforma em uma lista de li's(transformToLi), cola na ul ToDo(pasteToDoTask) e limpa o input.
-function main() {
+function createToDoList() {
     const task = getTask()
     add_ToArray_(task, toDo);
     let liToDoArray = toDo.map(transformToLi).join('');
@@ -76,12 +85,16 @@ function findSelected() {
     let selected = document.querySelector('input[name="toDoTask"]:checked').value;
     return selected;
 }
-// transforma cada item em uma li com os atributos necessarios
+// transforma cada item em uma li com os atributos necessarios 
+// Ajeitar o delete
 function transformToDoneLi(value) {
 
     const li = ` <li data-index = ${done.indexOf(value)}>
-                    <input type="checkbox" name="doneTask" value="${value}" checked onchange="manipulateUncheckedBox()">
-                    <label for="doneTask">${value}</label>
+                    <label>
+                        <input type="checkbox" name="doneTask" value="${value}" onchange="manipulateUncheckedBox()" checked>
+                        <span class="checkSpan"></i></span>
+                    </label>
+                    ${value}
                 </li>`;
     return li;
 }
@@ -90,11 +103,11 @@ function pasteDoneTask(array) {
     document.querySelector('#doneTasksList').innerHTML = array;
 }
 // tendo o conteúdo, retorna o indice dele no array passado.
-function takeIndex(array,value){
+function takeIndex(array, value) {
     return array.indexOf(value);
 }
 // remove o conteudo do indice recebido no array tambem recebido
-function deleteIndex_From_(index, array){
+function deleteIndex_From_(index, array) {
     array.splice(index, 1)
 }
 
@@ -102,7 +115,7 @@ function manipulateCheckedBox() {
 
     let doneTask = findSelected();
     let indexToDelete = takeIndex(toDo, doneTask);
-    deleteIndex_From_(indexToDelete,toDo);
+    deleteIndex_From_(indexToDelete, toDo);
     // publicar ToDoList atualizada
     let liToDoArray = toDo.map(transformToLi).join('');
     pasteToDoTask(liToDoArray);
@@ -124,7 +137,7 @@ function manipulateUncheckedBox() {
     let toDoTask = findUnselected();
 
     let indexToDelete = takeIndex(done, toDoTask);
-    deleteIndex_From_(indexToDelete,done);
+    deleteIndex_From_(indexToDelete, done);
     // publicar ToDoList atualizada
     let liDoneArray = done.map(transformToDoneLi).join('');
     pasteDoneTask(liDoneArray);
@@ -134,3 +147,7 @@ function manipulateUncheckedBox() {
     pasteToDoTask(liToDoArray)
     // formatForm();
 }
+// :::::::::::::::::::::::::::::::::::::::::
+
+// function deleteFromArray() {
+// }

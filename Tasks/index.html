@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tasks</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css">
-    <script src="tasks.js" defer></script>
+    <script src="tasks.js"></script>
 </head>
 <body>
     <section>
@@ -15,7 +16,8 @@
             <!-- --------------- -->
             <form action="">
                 <input type="text" placeholder="New Task" id="task">
-                <input onfocus="" id="submit" type="submit" value="GO">
+                <button type="submit" id="submit">+</button>
+                
             </form>
         </div>
         
@@ -25,8 +27,7 @@
                 <div class="List" id="ToDo">
                     <h2>To Do:</h2>
                     <ul id="tasksList">
-                        <!-- <li>lavar louça</li> -->
-                        <!-- <li><input  type="radio" name="task" onchange="ManipulateRadioBtns()" value="lavar louça">lavar louça</li>  -->
+                        
                     </ul>
                 </div>
             </span>
@@ -35,13 +36,12 @@
                 <div class="List" id="Done">
                     <h2>Done:</h2>
                     <ul id="doneTasksList">
-                        <!-- <li>lavar louça</li> -->
                     </ul>
                 </div>
             </span>
-
         </div>
     </section>
+
     
 </body>
 </html>

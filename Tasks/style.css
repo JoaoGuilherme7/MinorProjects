@@ -173,7 +173,7 @@ li:nth-child(odd){
     background-color: #0000006c;
 }
 
-#doneTasksList li p{
+li p{
     width: 100%;    
 }
 
@@ -219,14 +219,14 @@ label input[type="checkbox"]:checked + .checkSpan::before{
 
     align-self: normal;
     border:none;
-    width: 20px;
+    width: 23px;
     height: 20px;
     background-color: rgba(0, 0, 0, 0.479);
     border-radius: 50%;
 
     color: #393939;
     margin-left: 3px;
-    font-size: .8frem
+    font-size: .8rem
 }
 
 .deleteButton:hover{

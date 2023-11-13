@@ -97,7 +97,10 @@ section{
     margin-left: .7vw;
 }
 
-
+#tasks{
+    background-image: linear-gradient(0deg, #000000d0, #ffffff00, #ffffff00), url(Tasks/design.png);
+    animation-duration: 1s;
+}
 
 @media screen and (max-width: 769px) {
 

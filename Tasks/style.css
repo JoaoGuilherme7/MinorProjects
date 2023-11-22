@@ -52,7 +52,6 @@ section{
 }
 
 .lists{
-    
     margin-top: .5rem;
     display: grid;
     width: 100%;
@@ -95,7 +94,6 @@ form{
     color: #666;
     border:none;
     padding:0 5px ;
-    
 }
 
 #submit{
@@ -216,11 +214,11 @@ label input[type="checkbox"]:checked + .checkSpan::before{
 /* ==DELETE BUTTON== */
 
 .deleteButton{
-
-    align-self: normal;
+    display: block;
     border:none;
     width: 23px;
-    height: 20px;
+    width: 20px;
+    /* height: 20px; */
     background-color: rgba(0, 0, 0, 0.479);
     border-radius: 50%;
 
@@ -231,7 +229,18 @@ label input[type="checkbox"]:checked + .checkSpan::before{
 
 .deleteButton:hover{
     transition: .3s;
-
     color: white;
+}
 
+li.dragging{
+   opacity: 0.3;
+   cursor: grabbing;
+}
+
+.drag-icon{
+    margin-left: .5rem;
+}
+
+.drag-icon:hover{
+    cursor: grab;
 }
